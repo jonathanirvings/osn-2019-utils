@@ -13,6 +13,7 @@ validations in `gen_problem.py` is currently WIP.
 
 ## Requirements
 
+- Python 2
 - Unix-based operating system
 - tcframe >= v1.0 in local machine and $TCFRAME_HOME setup accordingly
 
