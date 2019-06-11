@@ -13,7 +13,7 @@ def VerifyInput(problem_dir):
 
   if not os.path.exists(verifier):
     print(
-        "{}Input verifier does not exists. Skipping verifier{}".format(
+        "{}Input verifier does not exist. Skipping verifier{}".format(
             Fore.RED,
             Style.RESET_ALL))
     return
