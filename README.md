@@ -6,10 +6,18 @@ Currently `gen_problem.py` generates `generated/` directory containing:
 
 - Ready to upload problem description HTML, together with sample cases, open
 subtasks, and subtask headers.
+- A ZIP file of all testcases.
+
+Additionally, `gen_problem.py` also checks the following:
+
+- `{slug}_sample_X.in` matches `samples/sample_X.in`.
+- `{slug}_X_1.in` matches `opens/open_X.in`.
+- All testcases passes input verifier for all subtasks it belongs to.
+- All solutions have the expected verdict.
 
 More generated contents (for easier upload process to
-[Judgels](https://github.com/ia-toki/judgels)) and solution/test case
-validations in `gen_problem.py` is currently WIP.
+[Judgels](https://github.com/ia-toki/judgels)) and validations in
+`gen_problem.py` is currently WIP.
 
 ## Requirements
 
