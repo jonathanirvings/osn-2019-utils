@@ -11,6 +11,13 @@ def VerifyInput(problem_dir):
 
   verifier = os.path.join(problem_dir, "verifier.py")
 
+  if not os.path.exists(verifier):
+    print(
+        "{}Input verifier does not exists. Skipping verifier{}".format(
+            Fore.RED,
+            Style.RESET_ALL))
+    return
+
   def verify(file, subtask):
     with open(os.path.join("tc", file), "r") as stream:
       try:
