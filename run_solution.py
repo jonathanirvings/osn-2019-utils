@@ -6,9 +6,9 @@ import subprocess
 import problem_config
 
 def tcframe_string_to_verdict(s):
-  if s == "AC" or s == "OK":
+  if s == "AC":
     return problem_config.Verdict.ACCEPTED
-  if s == "WA":
+  if s == "WA" or s == "OK":
     return problem_config.Verdict.WRONG_ANSWER
   if s == "TLE":
     return problem_config.Verdict.TIME_LIMIT_EXCEEDED
