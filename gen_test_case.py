@@ -76,8 +76,9 @@ def GenerateTestCase(problem_dir):
   _check_samples(problem_dir)
   print("Sample cases match")
 
-  _check_open_subtasks(problem_dir)
-  print("Open subtasks match")
+  if os.path.isdir(os.path.join(problem_dir, "opens")):
+    _check_open_subtasks(problem_dir)
+    print("Open subtasks match")
 
   generated_dir = os.path.join(problem_dir, "generated")
 
