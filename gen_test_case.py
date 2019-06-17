@@ -21,12 +21,13 @@ def _check_samples(problem_dir):
                        os.path.join("tc",
                                     "%s_sample_%d.in" % (slug, i + 1))
                       ), "Sample input %d is different." % (i + 1)
-    assert filecmp.cmp(os.path.join(problem_dir,
-                                    "samples",
-                                    "sample_%d.out" % (i + 1)),
-                       os.path.join("tc",
-                                    "%s_sample_%d.out" % (slug, i + 1))
-                      ), "Sample output %d is different." % (i + 1)
+    if not config.interactive:
+      assert filecmp.cmp(os.path.join(problem_dir,
+                                      "samples",
+                                      "sample_%d.out" % (i + 1)),
+                         os.path.join("tc",
+                                      "%s_sample_%d.out" % (slug, i + 1))
+                        ), "Sample output %d is different." % (i + 1)
 
 def _check_open_subtasks(problem_dir):
   config = problem_config.get_problem_config(problem_dir)
@@ -50,14 +51,9 @@ def GenerateTestCase(problem_dir):
   def compile(file, executable):
     subprocess.call(["g++", "-std=c++11", "-O2", "-o", executable, file])
 
-  if os.path.exists(os.path.join(problem_dir, "scorer.cpp")):
-    compile(os.path.join(problem_dir, "scorer.cpp"), "scorer")
-  else:
-    print(
-        ("{}Output validator does not exist. Proceed only for " +
-         "interactive-type problem.{}").format(
-            Fore.RED,
-            Style.RESET_ALL))
+  if not config.interactive:
+    if os.path.exists(os.path.join(problem_dir, "scorer.cpp")):
+      compile(os.path.join(problem_dir, "scorer.cpp"), "scorer")
 
   assert (os.path.exists(os.path.join(problem_dir, "solution.cpp"))
       ), "solution.cpp does not exist"

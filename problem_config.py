@@ -46,6 +46,7 @@ class ProblemConfig(object):
   sample_cases = attr.ib()  # type: List[List[bool]]
   test_groups = attr.ib()  # type: List[List[bool]]
   solutions = attr.ib()  # type: List[Solution]
+  interactive = attr.ib()  # type: bool
 
   def check_sample_cases(self):
     for i in range(len(self.sample_cases)):
@@ -85,7 +86,8 @@ def parse_json_to_problem_config(object):
     object_json["points"],
     object_json["sample_cases"],
     object_json["test_groups"],
-    solutions)
+    solutions,
+    object_json["interactive"] if "interactive" in object_json else False)
   problem_config.check_parameters()
   return problem_config
 
