@@ -42,56 +42,58 @@ def GenerateDescription(problem_dir):
     
     if os.path.isfile(problem_description_location):
       problem_description = open(problem_description_location, "r").read()
-      
-      # Sample cases
-      for index in range(1, len(config.sample_cases) + 1):
-        sample_case_html = ""
 
-        sample_case_html += "<h3>{}</h3>\n".format(
-            _SAMPLE_INPUT_FORMAT[language].format(index))
-        sample_case_html += "<pre>\n"
-        with open(os.path.join(problem_dir,
-                               _SAMPLES_DIRNAME,
-                               "sample_%d.in" % index)) as f:
-          contents = [x.strip() for x in f.readlines()]
-          for content in contents:
-            sample_case_html += content + "\n"
-        sample_case_html += "</pre>\n"
+      if not config.interactive:
+        # Sample cases
+        for index in range(1, len(config.sample_cases) + 1):
+          sample_case_html = ""
 
-        sample_case_html += "<h3>{}</h3>\n".format(
-            _SAMPLE_OUTPUT_FORMAT[language].format(index))
-        sample_case_html += "<pre>\n"
-        with open(os.path.join(problem_dir,
-                               _SAMPLES_DIRNAME,
-                               "sample_%d.out" % index)) as f:
-          contents = [x.strip() for x in f.readlines()]
-          for content in contents:
-            sample_case_html += content + "\n"
-        sample_case_html += "</pre>"
-
-        problem_description = problem_description.replace(
-            _SAMPLE_CASES_TAG_FORMAT.format(index), sample_case_html)
-
-      # Open subtasks
-      open_subtasks_location = os.path.join(problem_dir, _OPEN_SUBTASKS_DIRNAME)
-      if os.path.isdir(open_subtasks_location):
-        open_subtasks = os.listdir(open_subtasks_location)
-        for index in range(1, len(open_subtasks) + 1):
-          open_subtask_html = ""
-
-          open_subtask_html += "<p>{}</p>\n".format(
-              _OPEN_SUBTASK_PREFIX[language])
-          open_subtask_html += "<pre>\n"
+          sample_case_html += "<h3>{}</h3>\n".format(
+              _SAMPLE_INPUT_FORMAT[language].format(index))
+          sample_case_html += "<pre>\n"
           with open(os.path.join(problem_dir,
-                                 _OPEN_SUBTASKS_DIRNAME,
-                                 "open_%d.in" % index)) as f:
+                                 _SAMPLES_DIRNAME,
+                                 "sample_%d.in" % index)) as f:
             contents = [x.strip() for x in f.readlines()]
             for content in contents:
-              open_subtask_html += content + "\n"
-          open_subtask_html += "</pre>"
+              sample_case_html += content + "\n"
+          sample_case_html += "</pre>\n"
+
+          sample_case_html += "<h3>{}</h3>\n".format(
+              _SAMPLE_OUTPUT_FORMAT[language].format(index))
+          sample_case_html += "<pre>\n"
+          with open(os.path.join(problem_dir,
+                                 _SAMPLES_DIRNAME,
+                                 "sample_%d.out" % index)) as f:
+            contents = [x.strip() for x in f.readlines()]
+            for content in contents:
+              sample_case_html += content + "\n"
+          sample_case_html += "</pre>"
 
           problem_description = problem_description.replace(
-              _OPEN_SUBTASK_TAG_FORMAT.format(index), open_subtask_html)
+              _SAMPLE_CASES_TAG_FORMAT.format(index), sample_case_html)
+
+        # Open subtasks
+        open_subtasks_location = os.path.join(problem_dir,
+                                              _OPEN_SUBTASKS_DIRNAME)
+        if os.path.isdir(open_subtasks_location):
+          open_subtasks = os.listdir(open_subtasks_location)
+          for index in range(1, len(open_subtasks) + 1):
+            open_subtask_html = ""
+
+            open_subtask_html += "<p>{}</p>\n".format(
+                _OPEN_SUBTASK_PREFIX[language])
+            open_subtask_html += "<pre>\n"
+            with open(os.path.join(problem_dir,
+                                   _OPEN_SUBTASKS_DIRNAME,
+                                   "open_%d.in" % index)) as f:
+              contents = [x.strip() for x in f.readlines()]
+              for content in contents:
+                open_subtask_html += content + "\n"
+            open_subtask_html += "</pre>"
+
+            problem_description = problem_description.replace(
+                _OPEN_SUBTASK_TAG_FORMAT.format(index), open_subtask_html)
 
       # Subtasks
       for index in range(1, len(config.points) + 1):
