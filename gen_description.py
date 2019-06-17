@@ -19,7 +19,7 @@ _SAMPLE_OUTPUT_FORMAT = {
     "en": "Sample Output {}", "id": "Contoh Keluaran {}"
 }
 _OPEN_SUBTASK_PREFIX = {
-    "en": "Consists of only the following test case:",
+    "en": "Contains only the following test case:",
     "id": "Hanya berisi kasus uji berikut:"
 }
 _SUBTASK_FORMAT = {
