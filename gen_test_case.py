@@ -1,3 +1,4 @@
+from colorama import Fore, Style
 import filecmp
 import os
 import shutil
@@ -49,12 +50,17 @@ def GenerateTestCase(problem_dir):
   def compile(file, executable):
     subprocess.call(["g++", "-std=c++11", "-O2", "-o", executable, file])
 
-  assert (os.path.exists(os.path.join(problem_dir, "scorer.cpp"))
-      ), "scorer.cpp does not exist"
+  if os.path.exists(os.path.join(problem_dir, "scorer.cpp")):
+    compile(os.path.join(problem_dir, "scorer.cpp"), "scorer")
+  else:
+    print(
+        ("{}Output validator does not exist. Proceed only for " +
+         "interactive-type problem.{}").format(
+            Fore.RED,
+            Style.RESET_ALL))
+
   assert (os.path.exists(os.path.join(problem_dir, "solution.cpp"))
       ), "solution.cpp does not exist"
-
-  compile(os.path.join(problem_dir, "scorer.cpp"), "scorer")
   compile(os.path.join(problem_dir, "solution.cpp"), "solution")
 
   spec_file = os.path.join(problem_dir, "spec.cpp")
