@@ -4,6 +4,7 @@ import sys
 
 import gen_description
 import gen_test_case
+import problem_config
 import run_solution
 import verify_input
 
@@ -29,10 +30,14 @@ def RunSolutions(problem_dir):
   run_solution.RunSolutions(problem_dir)
 
 def CleanUp(problem_dir):
-  runner_exec = os.path.join(problem_dir, "runner")
+  config = problem_config.get_problem_config(problem_dir)
+  if config.interactive:
+    os.remove("communicator")
+  else:
+    os.remove("scorer")
 
-  os.remove("scorer")
   os.remove("solution")
+  runner_exec = os.path.join(problem_dir, "runner")
   os.remove(runner_exec)
   shutil.rmtree("tc")
 
