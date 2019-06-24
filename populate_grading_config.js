@@ -6,8 +6,8 @@
 config = {};
 
 _DEFAULT_JUDGELS_SUBTASKS = 10;
-var numberOfSubtasks = max(_DEFAULT_JUDGELS_SUBTASKS,
-                           config.test_groups.length);
+var numberOfSubtasks = Math.max(_DEFAULT_JUDGELS_SUBTASKS,
+                                config.test_groups.length);
 
 function getSampleInputName(sample, subtask) {
   return 'sampleTestCaseSubtaskIds[' + sample + '][' + subtask + ']';
