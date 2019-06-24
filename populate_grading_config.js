@@ -5,7 +5,9 @@
 
 config = {};
 
-_DEFAULT_JUDGELS_SUBTASK = 10;
+_DEFAULT_JUDGELS_SUBTASKS = 10;
+var numberOfSubtasks = max(_DEFAULT_JUDGELS_SUBTASKS,
+                           config.test_groups.length);
 
 function getSampleInputName(sample, subtask) {
   return 'sampleTestCaseSubtaskIds[' + sample + '][' + subtask + ']';
@@ -33,7 +35,7 @@ function fillSampleCasesSubtasksAllocation() {
           "checked", config.sample_cases[sample][subtask]);
     }
     for (var subtask = config.sample_cases[sample].length;
-         subtask < _DEFAULT_JUDGELS_SUBTASK;
+         subtask < numberOfSubtasks;
          ++subtask) {
       $('input[name="' + getSampleInputName(sample, subtask) + '"]').prop(
           "checked", false);
@@ -58,7 +60,7 @@ function fillTestGroupsSubtasksAllocation() {
         + '"]').prop("checked", config.test_groups[test_group][subtask]);
     }
     for (var subtask = config.test_groups[test_group].length;
-         subtask < _DEFAULT_JUDGELS_SUBTASK;
+         subtask < numberOfSubtasks;
          ++subtask) {
       $('input[name="'
         + getTestGroupInputName(test_group, subtask)
@@ -73,7 +75,7 @@ function fillSubtasksPoints() {
         config.points[subtask]);
   }
   for (var subtask = config.points.length;
-       subtask < _DEFAULT_JUDGELS_SUBTASK;
+       subtask < numberOfSubtasks;
        ++subtask) {
     $('input[name="' + getSubtaskPointsInputName(subtask) + '"]').val("");
   }
