@@ -1,6 +1,7 @@
 // Insert problem config.json in the config variable, and run this script on
 // the browser console while the browser is showing the Judgels Problem Grading
-// Config page.
+// Config page after the test data files are configured (i.e. after pressing the
+// "Configure test data files in tcframe format" button).
 
 config = {};
 
