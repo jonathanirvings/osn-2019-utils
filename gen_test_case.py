@@ -51,7 +51,11 @@ def GenerateTestCase(problem_dir):
   def compile(file, executable):
     subprocess.call(["g++", "-std=c++11", "-O2", "-o", executable, file])
 
-  if not config.interactive:
+  if config.interactive:
+    assert (os.path.exists(os.path.join(problem_dir, "communicator.cpp"))
+      ), "communicator.cpp does not exist"
+    compile(os.path.join(problem_dir, "communicator.cpp"), "communicator")
+  else:
     assert (os.path.exists(os.path.join(problem_dir, "scorer.cpp"))
       ), "scorer.cpp does not exist"
     compile(os.path.join(problem_dir, "scorer.cpp"), "scorer")
